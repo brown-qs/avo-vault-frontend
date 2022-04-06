@@ -1,0 +1,13 @@
+version: '3.7'
+services:
+  polido-frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: polido-frontend:latest
+    container_name: polido-frontend
+    env_file:
+      - ./.env
+    ports:
+      - 127.0.0.1:3100:3000
+    restart: always
