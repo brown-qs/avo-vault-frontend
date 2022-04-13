@@ -22,10 +22,10 @@ export const LIDO_NFT_BY_NETWORK: {
   [CHAINS.Kintsugi]: '0x0000000000000000000000000000000000000000',
 };
 
-export const MATIC_BY_NETWORK: {
+export const USDT_BY_NETWORK: {
   [key in CHAINS]: string;
 } = {
-  [CHAINS.Mainnet]: '0x7D1AfA7B718fb893dB30A3aBc0Cfc608AaCfeBB0',
+  [CHAINS.Mainnet]: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
   [CHAINS.Ropsten]: '0x0000000000000000000000000000000000000000',
   [CHAINS.Rinkeby]: '0x0000000000000000000000000000000000000000',
   [CHAINS.Goerli]: '0x499d11E0b6eAC7c0593d8Fb292DCBbF815Fb29Ae',
@@ -47,8 +47,8 @@ export const STAKE_MANAGER_BY_NETWORK: {
 export const getLidoMaticAddress = (chainId: CHAINS): string => {
   return LIDO_MATIC_BY_NETWORK[chainId];
 };
-export const getMaticAddress = (chainId: CHAINS): string => {
-  return MATIC_BY_NETWORK[chainId];
+export const getUsdtAddress = (chainId: CHAINS): string => {
+  return USDT_BY_NETWORK[chainId];
 };
 export const getLidoNFTAddress = (chainId: CHAINS): string => {
   return LIDO_NFT_BY_NETWORK[chainId];

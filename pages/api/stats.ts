@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 import { getInfuraRPCUrl } from '@lido-sdk/fetch';
 import { BigNumber, Contract, providers, utils } from 'ethers';
 
-import { getLidoMaticAddress, getMaticAddress } from 'config';
+import { getLidoMaticAddress, getUsdtAddress } from 'config';
 
 import getConfig from 'next/config';
 
@@ -20,7 +20,7 @@ export default async function handler(
   const { ethplorerMainnetUrl, defaultChain } = publicRuntimeConfig;
   const { infuraApiKey } = serverRuntimeConfig;
   const lidoMaticAddress = getLidoMaticAddress(+defaultChain);
-  const maticAddress = getMaticAddress(+defaultChain);
+  const usdtAddress = getUsdtAddress(+defaultChain);
 
   const provider = new providers.JsonRpcProvider({
     url: getInfuraRPCUrl(+defaultChain, infuraApiKey),
@@ -31,7 +31,7 @@ export default async function handler(
   const {
     price: { rate },
   } = await fetch(
-    `${ethplorerMainnetUrl}getTokenInfo/${maticAddress}?apiKey=${process.env.ETHPLORER_MAINNET_API_KEY}`,
+    `${ethplorerMainnetUrl}getTokenInfo/${usdtAddress}?apiKey=${process.env.ETHPLORER_MAINNET_API_KEY}`,
   ).then((res) => res.json());
 
   const { holdersCount } = await fetch(

@@ -80,7 +80,7 @@ const Wallet: WalletComponent = (props) => {
           title="Available to stake"
           loading={maticBalance.loading}
           value={
-            <FormatToken amount={maticBalance.data} symbol={maticSymbol} />
+            <FormatToken amount={maticBalance.data} symbol={maticSymbol} decimal={6} />
           }
         />
         <WalletCardAccount account={account} />

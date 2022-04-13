@@ -53,9 +53,10 @@ const Home: FC<HomeProps> = ({ faqList }) => {
       });
   }, []);
 
+
   return (
     <Layout
-      title="Lido on Polygon"
+      title="AVO Vault (Ethereum)"
       subtitle="Stake Matic and receive stMatic while staking."
     >
       <Tabs

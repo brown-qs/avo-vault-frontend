@@ -7,5 +7,6 @@ export type FormatTokenComponent = Component<
     symbol: string;
     amount?: BigNumber;
     approx?: boolean;
+    decimal?: number;
   }
 >;

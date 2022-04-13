@@ -1,14 +1,15 @@
 import { BigNumber } from '@ethersproject/bignumber';
-import { formatEther } from '@ethersproject/units';
+import { formatEther, formatUnits } from '@ethersproject/units';
 import { Zero } from '@ethersproject/constants';
 
-type FormatBalance = (balance?: BigNumber, maxDecimalDigits?: number) => string;
+type FormatBalance = (balance?: BigNumber, maxDecimalDigits?: number, tokenDecimal?: number) => string;
 
 export const formatBalance: FormatBalance = (
   balance = Zero,
   maxDecimalDigits = 4,
+  tokenDecimal = 18,
 ) => {
-  const balanceString = formatEther(balance);
+  const balanceString = formatUnits(balance, tokenDecimal);
 
   if (balanceString.includes('.')) {
     const parts = balanceString.split('.');

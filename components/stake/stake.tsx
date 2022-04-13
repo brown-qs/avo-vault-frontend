@@ -6,7 +6,7 @@ import { BigNumber, utils } from 'ethers';
 import notify from 'utils/notify';
 import styled from 'styled-components';
 import SubmitOrConnect from 'components/submitOrConnect';
-import { Matic } from 'components/tokens';
+import { Usdt } from 'components/tokens';
 import StatusModal from 'components/statusModal';
 import { formatBalance } from 'utils';
 import { SCANNERS } from 'config';
@@ -75,14 +75,14 @@ const Stake: FC = () => {
   const getCurrentBalance = async () => {
     if (account && maticTokenWeb3) {
       const balance = await maticTokenWeb3.balanceOf(account);
-      return utils.formatEther(balance);
+      return utils.formatUnits(balance, 6);
     }
     return 0;
   };
   const setMaxInputValue = () => {
     if (account) {
       maticTokenWeb3?.balanceOf(account).then((max) => {
-        setEnteredAmount(utils.formatEther(max));
+        setEnteredAmount(utils.formatUnits(max, 6));
         if (lidoMaticWeb3 && max.gt(0)) {
           lidoMaticWeb3.convertMaticToStMatic(max).then(([reward]) => {
             setReward(formatBalance(reward));
@@ -90,7 +90,7 @@ const Stake: FC = () => {
         } else {
           setReward('0');
         }
-        checkAllowance(utils.formatEther(max));
+        checkAllowance(utils.formatUnits(max, 6));
       });
     }
   };
@@ -208,6 +208,7 @@ const Stake: FC = () => {
     if (+amount === 0) {
       setReward('0');
       setCanStake(false);
+
       setCanUnlock(false);
     }
     if (+amount) {
@@ -264,11 +265,13 @@ const Stake: FC = () => {
               setStatusData({ step: 'failed' });
             } else {
               setStatusData({ amount: enteredAmount, step: 'approve-success' });
+
               setCanUnlock(false);
               setCanStake(true);
             }
           } else {
             setStatusData({ amount: enteredAmount, step: 'approved-already' });
+
             setCanUnlock(false);
             setCanStake(true);
           }
@@ -308,6 +311,7 @@ const Stake: FC = () => {
             step: 'success',
           });
           setEnteredAmount('');
+
           setCanUnlock(false);
           setCanStake(false);
         } else {
@@ -371,7 +375,7 @@ const Stake: FC = () => {
           <Input
             fullwidth
             value={enteredAmount}
-            leftDecorator={<Matic />}
+            leftDecorator={<Usdt />}
             rightDecorator={
               <InputRightDecorator
                 hardCapLimit={hardCapLimit.current || 0}
